@@ -284,18 +284,9 @@ const generateCardImage = (name, type, color) => {
   ctx.fill();
   ctx.globalAlpha = 1.0;
   
-  // Text with shadow for better visibility on transparent background
-  ctx.fillStyle = 'white';
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-  ctx.shadowBlur = 8;
-  ctx.font = 'bold 40px Arial';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(name, 200, 80);
+  // No text rendering in the SVG
   
-  // Type
-  ctx.font = 'italic 32px Arial';
-  ctx.fillText(type, 200, 340);
+  return canvas.toDataURL('image/png');
   
   return canvas.toDataURL('image/png');
 };
