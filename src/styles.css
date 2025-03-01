@@ -1,4 +1,9 @@
-/* Base styles */
+.gallery-instructions {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}/* Base styles */
 :root {
   --primary-color: #8a2be2;
   --secondary-color: #00bfff;
@@ -114,7 +119,7 @@ h1 {
 .card-3d-container {
   width: 100%;
   min-height: 100%;
-  height: 350px;
+  height: auto;
   position: relative;
   transform-style: preserve-3d;
   cursor: grab;
@@ -128,12 +133,12 @@ h1 {
 .card-3d {
   width: 100%;
   min-height: 100%;
-  height: auto;
+  height: 400px;
   position: relative;
   transform-style: preserve-3d;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  overflow: visible; /* Changed from hidden to allow backside to be visible */
   transition: transform 0.8s ease;
   will-change: transform;
   padding-bottom: 1rem;
@@ -153,6 +158,7 @@ h1 {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
+  transform-style: preserve-3d; /* Added to ensure 3D effect propagates */
 }
 
 .card-front {

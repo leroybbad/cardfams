@@ -411,11 +411,6 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
         });
       }
     },
-    onClick: () => {
-      if (isSelected) {
-        setFlipped(state => !state);
-      }
-    },
     onMouseLeave: () => {
       if (isSelected) {
         api.start({
@@ -438,6 +433,7 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
         opacity
       }}
       {...bind()}
+      onClick={() => isSelected && setFlipped(state => !state)}
     >
       <div className={`card-3d ${flipped ? 'flipped' : ''}`} style={{ 
         background: `linear-gradient(135deg, ${color}88, ${color}44)` 
@@ -463,10 +459,6 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
           <div className="card-back-content">
             <h3>For {name}</h3>
             <p className="card-message">{message || "Special NFT Card for a special person."}</p>
-            <div className="card-info">
-              <p>Type: {type}</p>
-              <p>Collection: Family Edition</p>
-            </div>
           </div>
         </div>
       </div>
@@ -484,6 +476,7 @@ const CardGallery = () => {
 
   return (
     <div className="gallery-container">
+      <p className="gallery-instructions">Click on a card to select it. Click again to flip it.</p>
       <div className="cards-container">
         {cardsData.map((card, index) => (
           <motion.div 
