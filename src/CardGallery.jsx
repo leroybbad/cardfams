@@ -284,9 +284,18 @@ const generateCardImage = (name, type, color) => {
   ctx.fill();
   ctx.globalAlpha = 1.0;
   
-  // No text rendering in the SVG
+  // Text with shadow for better visibility on transparent background
+  ctx.fillStyle = 'white';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  ctx.shadowBlur = 8;
+  ctx.font = 'bold 40px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(name, 200, 80);
   
-  return canvas.toDataURL('image/png');
+  // Type
+  ctx.font = 'italic 32px Arial';
+  ctx.fillText(type, 200, 340);
   
   return canvas.toDataURL('image/png');
 };
@@ -411,6 +420,11 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
         });
       }
     },
+    onClick: () => {
+      if (isSelected) {
+        setFlipped(state => !state);
+      }
+    },
     onMouseLeave: () => {
       if (isSelected) {
         api.start({
@@ -433,7 +447,6 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
         opacity
       }}
       {...bind()}
-      onClick={() => isSelected && setFlipped(state => !state)}
     >
       <div className={`card-3d ${flipped ? 'flipped' : ''}`} style={{ 
         background: `linear-gradient(135deg, ${color}88, ${color}44)` 
@@ -459,6 +472,7 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
           <div className="card-back-content">
             <h3>For {name}</h3>
             <p className="card-message">{message || "Special NFT Card for a special person."}</p>
+
           </div>
         </div>
       </div>
@@ -476,7 +490,6 @@ const CardGallery = () => {
 
   return (
     <div className="gallery-container">
-      <p className="gallery-instructions">Click on a card to select it. Click again to flip it.</p>
       <div className="cards-container">
         {cardsData.map((card, index) => (
           <motion.div 
