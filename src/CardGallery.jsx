@@ -107,17 +107,14 @@ const cardsData = [
 
 // Generate reliable canvas illustrations that work on all devices including iOS
 const generateCardImage = (name, type, color) => {
+  // Create a high resolution canvas for better quality
   const canvas = document.createElement('canvas');
-  canvas.width = 200;
-  canvas.height = 200;
+  canvas.width = 400; // Doubled for better quality
+  canvas.height = 400;
   const ctx = canvas.getContext('2d');
   
-  // Background - dark gradient
-  const gradient = ctx.createLinearGradient(0, 0, 200, 200);
-  gradient.addColorStop(0, '#1a1a2e');
-  gradient.addColorStop(1, '#16213e');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 200, 200);
+  // Transparent background
+  ctx.clearRect(0, 0, 400, 400);
   
   // Draw shape based on type
   ctx.fillStyle = color;
@@ -125,65 +122,65 @@ const generateCardImage = (name, type, color) => {
   if (type.includes('Diamond') || type.includes('Gem') || type.includes('Ruby') || type.includes('Sapphire') || type.includes('Amethyst')) {
     // Diamond shape
     ctx.beginPath();
-    ctx.moveTo(100, 40);
-    ctx.lineTo(140, 100);
-    ctx.lineTo(100, 160);
-    ctx.lineTo(60, 100);
+    ctx.moveTo(200, 80);
+    ctx.lineTo(280, 200);
+    ctx.lineTo(200, 320);
+    ctx.lineTo(120, 200);
     ctx.closePath();
     ctx.fill();
     
     // Highlight
     ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
     ctx.beginPath();
-    ctx.moveTo(100, 40);
-    ctx.lineTo(140, 100);
-    ctx.lineTo(100, 100);
+    ctx.moveTo(200, 80);
+    ctx.lineTo(280, 200);
+    ctx.lineTo(200, 200);
     ctx.closePath();
     ctx.fill();
   } 
   else if (type.includes('Ball') || type.includes('Cookie') || type.includes('Heart')) {
     // Circle or ball
     ctx.beginPath();
-    ctx.arc(100, 100, 60, 0, Math.PI * 2);
+    ctx.arc(200, 200, 120, 0, Math.PI * 2);
     ctx.fill();
     
     // Details for sports balls
     if (type.includes('Soccer')) {
       ctx.fillStyle = 'black';
       ctx.beginPath();
-      ctx.arc(100, 70, 15, 0, Math.PI * 2);
+      ctx.arc(200, 140, 30, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(70, 110, 15, 0, Math.PI * 2);
+      ctx.arc(140, 220, 30, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(130, 110, 15, 0, Math.PI * 2);
+      ctx.arc(260, 220, 30, 0, Math.PI * 2);
       ctx.fill();
     } else if (type.includes('Basket')) {
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 6;
       ctx.beginPath();
-      ctx.arc(100, 100, 60, 0, Math.PI * 2);
-      ctx.moveTo(40, 100);
-      ctx.lineTo(160, 100);
+      ctx.arc(200, 200, 120, 0, Math.PI * 2);
+      ctx.moveTo(80, 200);
+      ctx.lineTo(320, 200);
       ctx.stroke();
     }
   }
   else if (type.includes('Bone')) {
     // Bone shape
     ctx.beginPath();
-    ctx.moveTo(60, 70);
-    ctx.lineTo(70, 60);
-    ctx.lineTo(85, 70);
-    ctx.lineTo(115, 70);
-    ctx.lineTo(130, 60);
-    ctx.lineTo(140, 70);
-    ctx.lineTo(140, 85);
-    ctx.lineTo(130, 95);
-    ctx.lineTo(115, 85);
-    ctx.lineTo(85, 85);
-    ctx.lineTo(70, 95);
-    ctx.lineTo(60, 85);
+    ctx.moveTo(120, 140);
+    ctx.lineTo(140, 120);
+    ctx.lineTo(170, 140);
+    ctx.lineTo(230, 140);
+    ctx.lineTo(260, 120);
+    ctx.lineTo(280, 140);
+    ctx.lineTo(280, 170);
+    ctx.lineTo(260, 190);
+    ctx.lineTo(230, 170);
+    ctx.lineTo(170, 170);
+    ctx.lineTo(140, 190);
+    ctx.lineTo(120, 170);
     ctx.closePath();
     ctx.fill();
   }
@@ -191,14 +188,14 @@ const generateCardImage = (name, type, color) => {
     // Star shape
     ctx.beginPath();
     const spikes = 5;
-    const outerRadius = 60;
-    const innerRadius = 30;
+    const outerRadius = 120;
+    const innerRadius = 60;
     
     for (let i = 0; i < spikes * 2; i++) {
       const radius = i % 2 === 0 ? outerRadius : innerRadius;
       const angle = (Math.PI * i) / spikes;
-      const x = 100 + radius * Math.sin(angle);
-      const y = 100 + radius * Math.cos(angle);
+      const x = 200 + radius * Math.sin(angle);
+      const y = 200 + radius * Math.cos(angle);
       
       if (i === 0) {
         ctx.moveTo(x, y);
@@ -213,96 +210,98 @@ const generateCardImage = (name, type, color) => {
   else if (type.includes('Cupcake')) {
     // Cupcake base
     ctx.fillStyle = '#8B4513';
-    ctx.fillRect(70, 100, 60, 60);
+    ctx.fillRect(140, 200, 120, 120);
     
     // Frosting
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.moveTo(70, 100);
-    ctx.quadraticCurveTo(100, 50, 130, 100);
+    ctx.moveTo(140, 200);
+    ctx.quadraticCurveTo(200, 100, 260, 200);
     ctx.closePath();
     ctx.fill();
     
     // Cherry
     ctx.fillStyle = '#FF0000';
     ctx.beginPath();
-    ctx.arc(100, 70, 10, 0, Math.PI * 2);
+    ctx.arc(200, 140, 20, 0, Math.PI * 2);
     ctx.fill();
   }
   else if (type.includes('Watch')) {
     // Watch band
     ctx.fillStyle = '#8B4513';
-    ctx.fillRect(70, 60, 20, 80);
-    ctx.fillRect(110, 60, 20, 80);
+    ctx.fillRect(140, 120, 40, 160);
+    ctx.fillRect(220, 120, 40, 160);
     
     // Watch face
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.arc(100, 100, 35, 0, Math.PI * 2);
+    ctx.arc(200, 200, 70, 0, Math.PI * 2);
     ctx.fill();
     
     // Watch details
     ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.arc(100, 100, 30, 0, Math.PI * 2);
-    ctx.moveTo(100, 75);
-    ctx.lineTo(100, 100);
-    ctx.lineTo(115, 100);
+    ctx.arc(200, 200, 60, 0, Math.PI * 2);
+    ctx.moveTo(200, 150);
+    ctx.lineTo(200, 200);
+    ctx.lineTo(230, 200);
     ctx.stroke();
   }
   else if (type.includes('Seashell')) {
     // Seashell shape
     ctx.beginPath();
-    ctx.moveTo(60, 140);
-    ctx.quadraticCurveTo(100, 60, 140, 140);
+    ctx.moveTo(120, 280);
+    ctx.quadraticCurveTo(200, 120, 280, 280);
     ctx.closePath();
     ctx.fill();
     
     // Shell lines
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 4;
     ctx.beginPath();
     for (let i = 0; i < 5; i++) {
-      ctx.moveTo(60 + i * 15, 140);
-      ctx.quadraticCurveTo(100, 60 + i * 15, 140 - i * 15, 140);
+      ctx.moveTo(120 + i * 30, 280);
+      ctx.quadraticCurveTo(200, 120 + i * 30, 280 - i * 30, 280);
     }
     ctx.stroke();
   }
   else {
     // Default circle
     ctx.beginPath();
-    ctx.arc(100, 100, 60, 0, Math.PI * 2);
+    ctx.arc(200, 200, 120, 0, Math.PI * 2);
     ctx.fill();
   }
   
-  // Add sparkle effect
+  // Add sparkle effect with transparent background
   ctx.fillStyle = 'white';
   ctx.globalAlpha = 0.7;
   ctx.beginPath();
-  ctx.arc(70, 70, 5, 0, Math.PI * 2);
+  ctx.arc(140, 140, 10, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(130, 80, 4, 0, Math.PI * 2);
+  ctx.arc(260, 160, 8, 0, Math.PI * 2);
   ctx.fill();
   ctx.globalAlpha = 1.0;
   
-  // Text
+  // Text with shadow for better visibility on transparent background
   ctx.fillStyle = 'white';
-  ctx.font = 'bold 20px Arial';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+  ctx.shadowBlur = 8;
+  ctx.font = 'bold 40px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(name, 100, 40);
+  ctx.fillText(name, 200, 80);
   
   // Type
-  ctx.font = 'italic 16px Arial';
-  ctx.fillText(type, 100, 170);
+  ctx.font = 'italic 32px Arial';
+  ctx.fillText(type, 200, 340);
   
   return canvas.toDataURL('image/png');
 };
 
 // Particle component for sparkle effects
-const Particles = ({ active, color }) => {
+const Particles = ({ active, color, isSelected }) => {
   const containerRef = useRef(null);
   const particlesRef = useRef([]);
   
@@ -317,12 +316,11 @@ const Particles = ({ active, color }) => {
     container.innerHTML = '';
     particlesRef.current = [];
     
-    // Only create particles if the card is active
-    if (active) {
-      // Create particles
-      for (let i = 0; i < 20; i++) {
-        createParticle(container, containerWidth, containerHeight, color);
-      }
+    // Create particles - fewer when not selected for subtlety
+    const particleCount = 15;
+    
+    for (let i = 0; i < particleCount; i++) {
+      createParticle(container, containerWidth, containerHeight, color);
     }
     
     return () => {
@@ -341,8 +339,8 @@ const Particles = ({ active, color }) => {
     const x = Math.random() * width;
     const y = Math.random() * height;
     
-    // Random size
-    const size = Math.random() * 6 + 2;
+    // Random size - smaller particles when not selected
+    const size = Math.random() * 5 + 2;
     
     // Set styles
     particle.style.left = `${x}px`;
@@ -352,10 +350,10 @@ const Particles = ({ active, color }) => {
     particle.style.backgroundColor = color || '#ffffff';
     particle.style.opacity = Math.random() * 0.5 + 0.3;
     
-    // Add animation
-    const duration = Math.random() * 3 + 2;
+    // Add animation - slower animation for always-on effect
+    const duration = Math.random() * 5 + 3;
     particle.style.animation = `float ${duration}s ease-in-out infinite`;
-    particle.style.animationDelay = `${Math.random() * 2}s`;
+    particle.style.animationDelay = `${Math.random() * 5}s`;
     
     container.appendChild(particle);
     particlesRef.current.push(particle);
@@ -366,7 +364,7 @@ const Particles = ({ active, color }) => {
   return (
     <div 
       ref={containerRef} 
-      className={`particles-container ${active ? 'active' : ''}`}
+      className="particles-container active"
     ></div>
   );
 };
@@ -450,10 +448,12 @@ const Card3D = ({ name, type, color, isSelected, message }) => {
       }}
       {...bind()}
     >
-      <div className={`card-3d ${flipped ? 'flipped' : ''}`} style={{ background: `linear-gradient(135deg, ${color}88, ${color}44)` }}>
+      <div className={`card-3d ${flipped ? 'flipped' : ''}`} style={{ 
+        background: `linear-gradient(135deg, ${color}88, ${color}44)` 
+      }}>
         <div className="card-front">
           <div className="card-glow" style={{ backgroundColor: color }}></div>
-          <Particles color={color} active={isSelected} />
+          <Particles color={color} active={true} /> {/* Always show particles */}
           <div className="card-image-container">
             {cardImage && (
               <img 
